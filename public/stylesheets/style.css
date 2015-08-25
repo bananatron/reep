@@ -1,0 +1,263 @@
+/* GENERAL */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0.5rem;
+  font-family: 'Roboto', sans-serif;
+  background-color: #252830;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 500;
+}
+a:hover{
+  text-decoration: underline;
+}
+
+logo {
+  font-weight: 300;
+  font-size: 2rem;
+  letter-spacing: -0.05rem;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+/* Flex Tables */
+.flextable {
+  display: flex;
+  flex-direction: row;
+}
+.flexcolumn {
+  display: flex;
+  order: 1;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.flexrow__head {
+  order: 0;
+}
+.flexrow:nth-child(3){
+  order: 0;
+
+}
+.flexcolumn > .flexhead {
+  border-bottom: 2px solid #fff;
+}
+.flexitem {
+  flex-grow: 1;
+  padding: 0.2rem 0;
+  order: 0;
+  font-weight: 300;
+}
+.flexhead {
+  font-weight: 700 !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+li {
+  padding: 0.4rem 0.8rem;
+  /*border-radius: 5px;*/
+}
+li:hover {
+  background-color: rgb(85, 201, 169);
+  color: #252830;
+  cursor: pointer;
+}
+
+li.head {
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+  color: rgba(207, 210, 218, 0.3);
+  letter-spacing: 1px;
+}
+
+li.head:hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 35px;
+  padding: 3px 12px;
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ffffff;
+  background-color: #434857;
+  background-image: none;
+  border: 1px solid #434857;
+  /*border-radius: 4px;*/
+
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.form-control:focus {
+  border-color: #ffffff;
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+
+/* LAYOUT */
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.left, .right {
+  padding: 0.5rem;
+  color: #cfd2da;
+}
+.left {
+  flex-grow: 1;
+}
+.right {
+  flex-grow: 9;
+}
+
+
+.nav {
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  overflow: wrap;
+  word-wrap: break-word;
+  margin-bottom: 0.5rem;
+  padding: 0.2rem;
+  /*border-radius: 4px;*/
+}
+
+.footer {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: none;
+  -webkit-filter: blur(200px);
+  filter: blur(200px);
+  transition: all 0.5s;
+}
+
+.footer__item {
+  padding: 1rem;
+  text-align: center;
+  flex-grow: 1;
+  color: #fff;
+  font-size: 2rem;
+}
+.footer__item:hover, .footer__item:active  {
+  background-color: rgba(255, 255, 255, 0.1); 
+}
+
+
+
+
+
+/* UTILITY  */
+.box {
+  padding: 1rem;
+}
+.inactive {
+  color: rgba(207, 210, 218, 0.3);
+}
+.inactive:hover {
+  color: rgba(207, 210, 218, 0.3);
+  background-color: rgba(0, 0, 0, 0);
+  cursor: not-allowed;
+}
+
+.bg-green {
+  /*background-color: #1bc98e;*/
+  background-color: rgb(27, 201, 142);
+  color: rgb(30, 33, 39);
+}
+
+.bg-red {
+  /*background-color: #e64759;*/
+  background-color: rgb(230, 71, 89);
+  color: rgb(30, 33, 39);
+}
+
+.bg-purple {
+  /*background-color: #9f86ff;*/
+  background-color: rgb(159, 134, 255);
+  color: rgb(30, 33, 39);
+}
+
+.bg-yellow {
+  /*background-color: #e4d836;*/
+  background-color: rgb(228, 216, 54);
+  color: rgb(30, 33, 39);
+}
+
+.bg-blue {
+  /*background-color: #1997c6;*/
+  background-color: rgb(25, 151, 198);
+  color: rgb(30, 33, 39);
+}
+
+.bg-grey {
+  /*background-color: #cfd2da;*/
+  background-color: rgb(207, 210, 218);
+  color: rgb(30, 33, 39);
+}
+
+.bg-darkblue {
+  /*background-color: #1E2127;*/
+  background-color: rgb(30, 33, 39);
+}
+
+
+
+
+
+
+/* resize prep */
+@media screen and (max-width: 620px) { 
+  .footer {
+    display: flex;
+  }
+}
+@media screen and (max-width: 600px) { 
+  
+  /* LAYOUT */
+  .container {
+    flex-direction: column;
+  }
+  .nav {
+    flex-direction: row;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  
+  li.head {
+    display: none;
+  }
+  .footer {
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+  }
+  
+}
+
+
