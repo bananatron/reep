@@ -32,41 +32,6 @@ hr {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-
-/* Flex Tables */
-.flextable {
-  display: flex;
-  flex-direction: row;
-}
-.flexcolumn {
-  display: flex;
-  order: 1;
-  flex-direction: column;
-  flex-grow: 1;
-}
-.flexrow__head {
-  order: 0;
-}
-.flexrow:nth-child(3){
-  order: 0;
-
-}
-.flexcolumn > .flexhead {
-  border-bottom: 2px solid #fff;
-}
-.flexitem {
-  flex-grow: 1;
-  padding: 0.2rem 0;
-  order: 0;
-  font-weight: 300;
-}
-.flexhead {
-  font-weight: 700 !important;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-
-
 ul {
   list-style-type: none;
   padding: 0;
@@ -118,7 +83,111 @@ li.head:hover {
 }
 
 
-/* LAYOUT */
+
+
+
+/* TASKS */
+
+.task {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.task__header {
+  display: flex;
+  padding: 0.5rem 0.8rem;
+  align-items: center;
+  background: rgb(159, 134, 255);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.2);
+  cursor: default;
+}
+.task__header:hover {
+    filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncA type="table" tableValues="0 0.25" /></feComponentTransfer></filter></svg>#filter');
+  -webkit-filter: opacity(90%);
+          filter: opacity(90%);
+}
+
+.task__header_title{
+  flex-grow: 10;
+  color: rgb(30, 33, 39);
+}
+.task__header_cat{
+  font-size: 1.8rem;
+  flex-grow: 1;
+  color: rgb(30, 33, 39);
+  min-width: 35px;
+  text-align: center;
+  margin-right:1rem;
+}
+
+
+/*.task__header-circle{*/
+/*  background-color: rgb(30, 33, 39);*/
+/*	-moz-border-radius: 50%;*/
+/*	-webkit-border-radius: 50%;*/
+/*	border-radius: 50%;*/
+/*  min-width: 25px;*/
+/*  height: 25px;*/
+/*  margin-right: 0.5rem;*/
+/*  border: 1px solid rgba(255, 255, 255, 0.2);*/
+/*}*/
+
+.task__header_score{
+  font-size: 0.8rem;
+  flex-grow: 1;
+  font-weight: 700;
+  color: rgb(30, 33, 39);
+  min-width: 40px;
+  text-align: center;
+}
+  
+
+
+.task__body {
+  position: relative;
+}
+.task__body--hidden {
+  display: none;
+}
+
+.task__body_description{
+  padding: 1rem;
+}
+
+.task__body_actions {
+  display:flex;
+}
+
+.task__action {
+  flex-grow: 1;
+  text-align: center;
+  padding: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgb(30, 33, 39);
+  transition: all 0.1s ease-in-out;
+}
+.task__action:nth-child(1){
+  border-left: 0px;
+}
+.task__action:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* TEMPLATE LAYOUT */
 .container {
   display: flex;
   flex-direction: row;
@@ -128,11 +197,11 @@ li.head:hover {
   padding: 0.5rem;
   color: #cfd2da;
 }
-.left {
-  flex-grow: 1;
-}
+/*.left {*/
+  
+/*}*/
 .right {
-  flex-grow: 9;
+  flex-grow: 1;
 }
 
 
@@ -148,7 +217,8 @@ li.head:hover {
 }
 
 .footer {
-  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9000;
+  background-color: rgb(0, 0, 0);
   position: fixed;
   bottom: 0;
   left: 0;
@@ -172,9 +242,41 @@ li.head:hover {
 
 
 
-
-
 /* UTILITY  */
+
+
+/* Flex Tables */
+.flextable {
+  display: flex;
+  flex-direction: row;
+}
+.flexcolumn {
+  display: flex;
+  order: 1;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.flexrow__head {
+  order: 0;
+}
+.flexrow:nth-child(3){
+  order: 0;
+
+}
+.flexcolumn > .flexhead {
+  border-bottom: 2px solid #fff;
+}
+.flexitem {
+  flex-grow: 1;
+  padding: 0.2rem 0;
+  order: 0;
+  font-weight: 300;
+}
+.flexhead {
+  font-weight: 700 !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
 .box {
   padding: 1rem;
 }
@@ -192,12 +294,23 @@ li.head:hover {
   background-color: rgb(27, 201, 142);
   color: rgb(30, 33, 39);
 }
+.bg-green-hover:hover {
+  /*background-color: #1bc98e;*/
+  background-color: rgb(27, 201, 142);
+  color: rgb(30, 33, 39);
+}
 
 .bg-red {
   /*background-color: #e64759;*/
   background-color: rgb(230, 71, 89);
   color: rgb(30, 33, 39);
 }
+.bg-red-hover:hover {
+  /*background-color: #e64759;*/
+  background-color: rgb(230, 71, 89);
+  color: rgb(30, 33, 39);
+}
+
 
 .bg-purple {
   /*background-color: #9f86ff;*/
@@ -230,9 +343,6 @@ li.head:hover {
 
 
 
-
-
-
 /* resize prep */
 @media screen and (max-width: 620px) { 
   .footer {
@@ -242,6 +352,9 @@ li.head:hover {
 @media screen and (max-width: 600px) { 
   
   /* LAYOUT */
+  body{
+    padding-bottom: 80px;
+  }
   .container {
     flex-direction: column;
   }
