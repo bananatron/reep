@@ -1,45 +1,79 @@
 <div class="tasks_container">
 
-  <div class="task">
-    <div class="task__header">
-      <!--<div class="task__header-circle"><div class="task__header-score">3</div></div>-->
-      
-      <div class="task__header_cat"><span class="ion-coffee"></span></div>
-      <div class="task__header_title">Title of task thing to asdf asdf asd  do</div>
-      <div class="task__header_score"><span class="ion-flash"></span> 3</div>
-      
-    </div>
+
+  <div id="task-input">
     
-    <div class="task__body bg-darkblue">
-      <div class="task__body_description">This is a task description. It probably won't be super long, because it's just to summarize shit.</div>
-      <div class="task__body_actions">
-        <div class="task__action"><span class="ion-edit"></span></div>
-        <div class="task__action"><span class="ion-checkmark"></span></div>
-        <div class="task__action"><span class="ion-close"></span></div>
-      </div>
-    </div>
-    
-  </div>
-  
-  <div class="task">
-    <div class="task__header">
-      <!--<div class="task__header-circle"><div class="task__header-score">3</div></div>-->
+    <div class="box bg-darkblue">
       
-      <div class="task__header_cat"><span class="ion-coffee"></span></div>
-      <div class="task__header_title">Title of task thing to asdf asdf asd  do</div>
-      <div class="task__header_score"><span class="ion-flash"></span> 3</div>
+      <form name="task_new">
+        
+        <div class="task__input_label text-light">Task Summary</div>
+        <input class="task__input"></input>
+        
+        <div class="task__input_label text-light">Task Description</div>
+        <textarea class="task__textarea"></textarea>
+        
+        <!--<div class="task__input_label text-light">Category</div>-->
+        <!--<select>-->
+        <!--  <option>Financial</option>-->
+        <!--  <option selected>Personal</option>-->
+        <!--  <option>Work</option>-->
+        <!--  <option>Chore</option>-->
+        <!--</select>-->
+        
+        <div class="task__input_label text-light">FOCUS <span class="ion-help-circled"></span></div>
+        <div class="task__catselect">
+          <div class="cat_option" data-selected="false"><span class="ion-ios-cart task__icon"></span>Financial</div>
+          <div class="cat_option" data-selected="false"><span class="ion-gear-b task__icon"></span>Chore</div>
+          <div class="cat_option" data-selected="false"><span class="ion-ios-body task__icon"></span>Personal</div>
+          <div class="cat_option" data-selected="false"><span class="ion-briefcase task__icon"></span>Work</div>
+          <div class="cat_option" data-selected="false"><span class="ion-android-people task__icon"></span>Family</div> 
+          <div class="cat_option" data-selected="false"><span class="ion-plus-circled task__icon"></span>Focus</div>
+        </div>
+        
+        
+        <div class="task__input_label text-light">SCORE <span class="ion-help-circled"></span></div>
+        <div class="task__scoreselect">
+          <div class="score_option" data-selected="false"><span class="ion-flash"></span> 1</div>
+          <div class="score_option" data-selected="false"><span class="ion-flash"></span> 2</div>
+          <div class="score_option" data-selected="false"><span class="ion-flash"></span> 3</div>
+          <div class="score_option" data-selected="false"><span class="ion-flash"></span> 4</div>
+          <div class="score_option" data-selected="false"><span class="ion-flash"></span> 5</div>
+        </div>
+        
       
-    </div>
-    
-    <div class="task__body bg-darkblue">
-      <div class="task__body_description">This is a task description. It probably won't be super long, because it's just to summarize shit.</div>
-      <div class="task__body_actions">
-        <div class="task__action"><span class="ion-edit"></span></div>
-        <div class="task__action bg-green-hover"><span class="ion-checkmark"></span></div>
-        <div class="task__action bg-red-hover"><span class="ion-close"></span></div>
-      </div>
+      </form>
+      
     </div>
     
   </div>
 
+<br><br>
+  <div class="task">
+    
+    <div class="task__header">
+      <div class="header_cat"><span class="ion-coffee"></span></div>
+      <div class="header_title">Title of task thing to asdf asdf asd  do</div>
+      <div class="header_score"><span class="ion-flash"></span> 3</div>
+      
+    </div>
+    
+    <div class="task__body bg-darkblue">
+      
+      <div class="task__body_description">This is a task description. It probably won't be super long, because it's just to summarize shit.</div>
+      <div class="task__body_actions">
+        <div class="task__action bg-grey-hover"><span class="ion-edit"></span></div>
+        <div class="task__action  bg-green-hover"><span class="ion-checkmark"></span></div>
+        <div class="task__action bg-red-hover"><span class="ion-close "></span></div>
+      </div>
+      
+    </div>
+    
+  </div>
+
+
+
+  
+  
+  
 </div>
