@@ -6,9 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //var sass = require('node-sass');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
 
 // view engine setup
@@ -23,8 +20,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+/* GET index */
+app.get('/', function(req, res, next) {
+  app.locals.partial = 'tasks';
+  res.render('layout');
+});
+
+/* GET index */
+app.get('/login', function(req, res, next) {
+  app.locals.partial = 'login';
+  res.render('layout');
+});
+
+/* GET library */
+app.get('/library', function(req, res, next) {
+  app.locals.partial = 'library';
+  res.render('layout');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

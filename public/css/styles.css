@@ -2244,9 +2244,6 @@ a {
   color: inherit;
   font-weight: 500; }
 
-a:hover {
-  text-decoration: underline; }
-
 .logo {
   min-height: 100px;
   font-weight: 300;
@@ -2338,7 +2335,7 @@ li.head:hover {
     -ms-flex-positive: 10;
     flex-grow: 10;
     color: #1e2127; }
-  .task__header .header_cat {
+  .task__header .header_focus {
     font-size: 1.8rem;
     -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
@@ -2424,16 +2421,16 @@ li.head:hover {
   background-color: #1bc98e !important;
   color: #1e2127; }
 
-.task__catselect {
+.task__focusselect {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap; }
-  .task__catselect .task__icon {
+  .task__focusselect .task__icon {
     margin-right: 0.4rem; }
-  .task__catselect .cat_option {
+  .task__focusselect .focus_option {
     min-width: 100px;
     padding: 1rem;
     -webkit-flex-grow: 1;
@@ -2445,7 +2442,7 @@ li.head:hover {
     cursor: pointer;
     font-weight: 300;
     border: 1px solid #1e2127; }
-  .task__catselect .cat_option:hover {
+  .task__focusselect .focus_option:hover {
     color: #1e2127;
     background-color: #e4d836; }
 
@@ -2549,6 +2546,24 @@ select {
   background-color: rgba(255, 255, 255, 0.1); }
 
 /* UTILITY  */
+.button {
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  text-align: center; }
+
+.button:hover {
+  background-color: #1bc98e;
+  color: #1e2127; }
+
+.submit {
+  border: 1px solid #1e2127;
+  margin-top: 1rem;
+  background-color: #1bc98e;
+  color: #1e2127; }
+
 /* Flex Tables */
 .flextable {
   display: -webkit-flex;

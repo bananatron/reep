@@ -1,9 +1,12 @@
+var myFirebaseRef = new Firebase("https://reep.firebaseio.com/");
+
+console.log(myFirebaseRef);
 
 var taskModel = {
-    name: "",
+    summary: "",
     description: "",
     score: 0,
-    categories: [],
+    focus: [],
     complete: false
 }
 
@@ -13,15 +16,24 @@ $('.task__header').on('click', function(){
 });
 
 
+//Text Inputs
+$('.task__input').on('keyup', function(){ //Summary-Title
+  taskModel.summary = $(this).val();
+})
+$('.task__textarea').on('keyup', function(){ //Description
+  taskModel.description = $(this).val();
+})
 
-//Category Selection
-$('.cat_option').on('click', function(){
+
+
+//Focus Selection
+$('.focus_option').on('click', function(){
   toggleSelected(this);
   
   //Modify model
-  taskModel.categories = [];
-  $('.cat_option[data-selected="true"]').each(function( ii, node ) {
-    taskModel.categories.push( $(node).text() );
+  taskModel.focus = [];
+  $('.focus_option[data-selected="true"]').each(function( ii, node ) {
+    taskModel.focus.push( $(node).text() );
   });
 });
 
@@ -34,10 +46,23 @@ $('.score_option').on('click', function(){
 });
 
 
+//Submit button
+$('#task_submit').on('click', function(){
+  if (validateModel(taskModel)){
+    
+  };
+});
 
 
 
 //HELPERS
+var validateModel = function(model){ //Maybe put in notifications here?
+  if (model.summary == "" || model.summary == undefined) return false;
+  if (model.score == 0 || model.score == undefined) return false
+
+  return true;
+}
+
 var toggleSelected = function(self){
   if ( $(self).attr('data-selected') == 'true' ) {
     $(self).attr('data-selected', 'false'); 

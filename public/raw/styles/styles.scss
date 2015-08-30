@@ -29,9 +29,6 @@ a {
   color: inherit;
   font-weight: 500;
 }
-a:hover{
-  text-decoration: underline;
-}
 
 .logo {
   min-height: 100px;
@@ -128,7 +125,7 @@ li.head:hover {
     flex-grow: 10;
     color: $text-dark;
   }
-  .header_cat{
+  .header_focus{
     font-size: 1.8rem;
     flex-grow: 1;
     color: $text-dark;
@@ -221,7 +218,7 @@ li.head:hover {
   color: $text-dark;
 }
 
-.task__catselect {
+.task__focusselect {
   display: flex;
   flex-wrap: wrap;
   
@@ -229,7 +226,7 @@ li.head:hover {
     margin-right: 0.4rem;
   }
   
-  .cat_option {
+  .focus_option {
     min-width: 100px;
     padding: 1rem;
     flex-grow: 1;
@@ -242,7 +239,7 @@ li.head:hover {
   }
 
   
-  .cat_option:hover {
+  .focus_option:hover {
     color: $text-dark;
     background-color: $yellow;
   }
@@ -371,6 +368,27 @@ select {
 
 /* UTILITY  */
 
+.button {
+  padding: $base-spacing;
+  background-color: rgba(0 , 0, 0, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  text-align: center;
+  
+}
+.button:hover {
+  background-color: $green;
+  color: $text-dark;
+}
+.submit {
+  border: 1px solid $darkblue;
+  margin-top: $base-spacing;
+  background-color: $green;
+  color: $text-dark;
+}
+  
+  
 
 /* Flex Tables */
 .flextable {

@@ -13,7 +13,7 @@
         <div class="task__input_label text-light">Task Description</div>
         <textarea class="task__textarea"></textarea>
         
-        <!--<div class="task__input_label text-light">Category</div>-->
+        <!--<div class="task__input_label text-light">focusegory</div>-->
         <!--<select>-->
         <!--  <option>Financial</option>-->
         <!--  <option selected>Personal</option>-->
@@ -22,13 +22,13 @@
         <!--</select>-->
         
         <div class="task__input_label text-light">FOCUS <span class="ion-help-circled"></span></div>
-        <div class="task__catselect">
-          <div class="cat_option" data-selected="false"><span class="ion-ios-cart task__icon"></span>Financial</div>
-          <div class="cat_option" data-selected="false"><span class="ion-gear-b task__icon"></span>Chore</div>
-          <div class="cat_option" data-selected="false"><span class="ion-ios-body task__icon"></span>Personal</div>
-          <div class="cat_option" data-selected="false"><span class="ion-briefcase task__icon"></span>Work</div>
-          <div class="cat_option" data-selected="false"><span class="ion-android-people task__icon"></span>Family</div> 
-          <div class="cat_option" data-selected="false"><span class="ion-plus-circled task__icon"></span>Focus</div>
+        <div class="task__focusselect">
+          <div class="focus_option" data-selected="false"><span class="ion-ios-cart task__icon"></span>Financial</div>
+          <div class="focus_option" data-selected="false"><span class="ion-gear-b task__icon"></span>Chore</div>
+          <div class="focus_option" data-selected="false"><span class="ion-ios-body task__icon"></span>Personal</div>
+          <div class="focus_option" data-selected="false"><span class="ion-briefcase task__icon"></span>Work</div>
+          <div class="focus_option" data-selected="false"><span class="ion-android-people task__icon"></span>Family</div> 
+          <div class="focus_option" data-selected="false"><span class="ion-plus-circled task__icon"></span>Focus</div>
         </div>
         
         
@@ -41,6 +41,8 @@
           <div class="score_option" data-selected="false"><span class="ion-flash"></span> 5</div>
         </div>
         
+        <div id="task_submit" class="button submit"><span class="ion-plus task__icon"></span> Add</div>
+        
       
       </form>
       
@@ -52,7 +54,7 @@
   <div class="task">
     
     <div class="task__header">
-      <div class="header_cat"><span class="ion-coffee"></span></div>
+      <div class="header_focus"><span class="ion-coffee"></span></div>
       <div class="header_title">Title of task thing to asdf asdf asd  do</div>
       <div class="header_score"><span class="ion-flash"></span> 3</div>
       
