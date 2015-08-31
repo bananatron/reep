@@ -1,7 +1,7 @@
 /* GENERAL */
 
 $base-spacing: 1rem;
-$font-base:    Helvetica, sans-serif;
+$font-base: Helvetica, sans-serif;
 $red: rgb(230, 71, 89);
 $green: rgb(27, 201, 142);
 $purple: rgb(159, 134, 255);
@@ -19,7 +19,7 @@ $bg-dark: rgb(37, 40, 48);
 
 html, body {
   margin: 0;
-  padding: 0.5rem;
+  padding: 0rem;
   font-family: 'Roboto', sans-serif;
   background-color: #252830;
 }
@@ -107,6 +107,32 @@ li.head:hover {
 
 /* TASKS */
 
+#add-task {
+  position: absolute;
+  top: $base-spacing;
+  right: $base-spacing;
+  font-size: 2rem;
+  cursor: pointer;
+}
+#add-task:hover {
+  color: $green;
+}
+
+#task-new{
+  display: none;
+  position: relative;
+  
+  .task-close_small {
+    position: absolute;
+    right: $base-spacing;
+    top: $base-spacing/2;
+  }
+  .task-close_small:hover {
+    color: $red;
+  }
+  
+}
+
 .task {
   display: flex;
   flex-direction: column;
@@ -151,7 +177,12 @@ li.head:hover {
           filter: opacity(90%);
 }
 
-
+.task__confirm_container {
+  display: flex;
+  .button{
+    flex-grow: 1;
+  }
+}
 
 .task__body {
   position: relative;
@@ -211,6 +242,10 @@ li.head:hover {
   letter-spacing: 1px;
   margin-bottom: 0.4rem;
   margin-top: 0.8rem;
+}
+
+.task__input_label:first-child {
+  margin-top: 0;
 }
   
 [data-selected="true"] {
@@ -305,16 +340,42 @@ select {
 
 
 
-
-
-
-
-
-
 /* TEMPLATE LAYOUT */
 .container {
   display: flex;
   flex-direction: row;
+  margin: 0 0.5rem;
+  position: relative;
+}
+
+.notifications {
+  
+  margin-bottom: $base-spacing;
+  display: flex;
+  flex-wrap: wrap;
+
+  .note{
+    font-weight: 300;
+    padding: $base-spacing/2;
+    color: $text-dark;
+    text-align: center;
+    flex-grow: 1;
+    background-color: $green;
+    margin-right: $base-spacing/4;
+    cursor: default;
+  }
+  .note:last-child{
+    margin-right: 0;
+  }
+  .alert {
+    background-color: $red;
+  }
+  
+  .notification__close {
+    float: right;
+    pointer-events: none;
+  }
+
 }
 
 .left, .right {
@@ -367,27 +428,28 @@ select {
 
 
 /* UTILITY  */
-
+.text-minimize {
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 0.6rem;
+  letter-spacing: 0.1rem;
+}
 .button {
   padding: $base-spacing;
-  background-color: rgba(0 , 0, 0, 0.2);
+  background-color: rgba(0 , 0, 0, 0.15);
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   cursor: pointer;
   text-align: center;
-  
 }
 .button:hover {
   background-color: $green;
   color: $text-dark;
 }
 .submit {
-  border: 1px solid $darkblue;
-  margin-top: $base-spacing;
-  background-color: $green;
-  color: $text-dark;
+  margin: $base-spacing 2px;
 }
-  
+
   
 
 /* Flex Tables */

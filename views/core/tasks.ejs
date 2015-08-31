@@ -3,9 +3,11 @@
 
   <div id="task-input">
     
-    <div class="box bg-darkblue">
+    <div id="task-new" class="box bg-darkblue">
       
-      <form name="task_new">
+      <div class="task-new__close task-close_small"><span class='ion-close-circled'></span></div>
+      
+      <form name="task-new">
         
         <div class="task__input_label text-light">Task Summary</div>
         <input class="task__input"></input>
@@ -41,7 +43,11 @@
           <div class="score_option" data-selected="false"><span class="ion-flash"></span> 5</div>
         </div>
         
-        <div id="task_submit" class="button submit"><span class="ion-plus task__icon"></span> Add</div>
+        <div class="task__confirm_container">
+          <div id="task_submit" class="button submit bg-green "><span class="ion-checkmark task__icon"></span></div>
+          <!--<div class="button submit task-new__clear bg-yellow"><span class="ion-trash-b task__icon"></span></div>-->
+          <div class="button submit task-new__close bg-red"><span class="ion-close task__icon"></span></div>
+        </div>
         
       
       </form>
