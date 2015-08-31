@@ -1,4 +1,3 @@
-
 var taskModel = {
     summary: "",
     description: "",
@@ -6,8 +5,6 @@ var taskModel = {
     focus: [],
     complete: false
 }
-
-
 
 //Show/hide new form
 $('.task-new__close').on('click', function(){
@@ -64,50 +61,5 @@ $('#task_submit').on('click', function(){
   if (validateModel(taskModel)){
     
   };
-});
-
-
-
-
-
-//HELPERS
-var validateModel = function(model){ //Maybe put in notifications here?
-  if (model.summary == "" || model.summary == undefined) return false;
-  if (model.score == 0 || model.score == undefined) return false
-
-  return true;
-}
-
-var toggleSelected = function(self){
-  if ( $(self).attr('data-selected') == 'true' ) {
-    $(self).attr('data-selected', 'false'); 
-  } else {
-    $(self).attr('data-selected', 'true'); 
-  }
-}
-
-
-// Notifications
-function Notification(text, type, trigger) {
-  this.text = text;
-  this.type = type || "";
-  
-  this.init = function(){
-    var note = $("<div class='note " + this.type + "' >" + this.text + "<span class='notification__close ion-close-circled'></span></div>");
-    $('.notifications').append(note);
-    if (trigger){
-      $(note).on('click', function(){ trigger()  })
-    }
-  }
-  
-  this.init();
-}
-
-$('.notifications').on('click', function(){
-  if ($(event.target).attr('class').indexOf('note') != -1){
-    $( event.target ).slideUp( 200, function() {
-      $( event.target ).remove();
-    })
-  }
 });
 

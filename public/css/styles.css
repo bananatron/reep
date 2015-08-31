@@ -2315,7 +2315,8 @@ li.head:hover {
   top: 1rem;
   right: 1rem;
   font-size: 2rem;
-  cursor: pointer; }
+  cursor: pointer;
+  display: none; }
 
 #add-task:hover {
   color: #1bc98e; }

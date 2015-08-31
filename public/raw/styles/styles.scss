@@ -106,13 +106,13 @@ li.head:hover {
 
 
 /* TASKS */
-
 #add-task {
   position: absolute;
   top: $base-spacing;
   right: $base-spacing;
   font-size: 2rem;
   cursor: pointer;
+  display: none;
 }
 #add-task:hover {
   color: $green;

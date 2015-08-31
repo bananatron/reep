@@ -1,4 +1,3 @@
-var ref = new Firebase("https://reep.firebaseio.com/");
 
 //Login button
 $('#user-login').on('click', function(){
@@ -29,9 +28,9 @@ $('#user-login').on('click', function(){
         }
        
       }
-      
     } else {
-      new Notification("Login succesful!");
+      //new Notification("Login succesful!");
+      window.location.href = "/";
     }
   });
 });
