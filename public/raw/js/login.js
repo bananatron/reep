@@ -1,3 +1,38 @@
+var ref = new Firebase("https://reep.firebaseio.com");
+
+
+var isNewUser = function() {
+  var uid = ref.getAuth().uid.toString();
+  var userRef = ref.child('users').child(uid);
+  userRef.once("value", function(snapshot) {
+    return true;
+  }, function (errorObject) {
+    return false;
+  });
+}
+
+
+
+
+//Listeners
+
+//Store new user creds on first signin (fb)
+ref.onAuth(function(authData) {
+  
+  if (authData && isNewUser) {
+    if (authData.password.email){
+      ref.child("users").child(authData.uid).set({
+        email: authData.password.email,
+        provider: authData.provider
+      });
+    } else {
+      ref.child("users").child(authData.uid).set({
+        provider: authData.provider
+      });
+    }
+  }
+  
+});
 
 //Login button
 $('#user-login').on('click', function(){
@@ -67,7 +102,3 @@ $('#user-resetpass').on('click', function(){
     }
   });
 });
-
-
-
-

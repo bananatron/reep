@@ -1,5 +1,5 @@
 /* GENERAL */
-
+////////////
 $base-spacing: 1rem;
 $font-base: Helvetica, sans-serif;
 $red: rgb(230, 71, 89);
@@ -191,7 +191,7 @@ li.head:hover {
   display: none;
 }
 
-.task__body_description{
+.task__body_details{
   padding: 1rem;
 }
 
@@ -303,7 +303,12 @@ li.head:hover {
   }
 }
 
-
+#user-login{
+  border: 0;
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+}
 // .task__scoreselect_option:first-child {
 //   border: 0;
 // }
@@ -341,6 +346,8 @@ select {
 
 
 /* TEMPLATE LAYOUT */
+////////////////////
+
 .container {
   display: flex;
   flex-direction: row;
@@ -349,7 +356,6 @@ select {
 }
 
 .notifications {
-  
   margin-bottom: $base-spacing;
   display: flex;
   flex-wrap: wrap;

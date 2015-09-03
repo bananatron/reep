@@ -2395,7 +2395,7 @@ li.head:hover {
 .task__body--hidden {
   display: none; }
 
-.task__body_description {
+.task__body_details {
   padding: 1rem; }
 
 .task__body_actions {
@@ -2497,6 +2497,12 @@ li.head:hover {
   .task__scoreselect .score_option:hover {
     color: #1e2127;
     background-color: #1997c6; }
+
+#user-login {
+  border: 0;
+  display: block;
+  width: 100%;
+  font-size: 1rem; }
 
 select {
   color: #cfd2da;
