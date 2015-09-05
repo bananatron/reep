@@ -2340,6 +2340,18 @@ li.head:hover {
   flex-direction: column;
   margin-bottom: 1rem; }
 
+#task-input {
+  margin-bottom: 1rem; }
+
+.hidden {
+  opacity: 0; }
+
+.unhidden {
+  opacity: 100 !important; }
+
+.tasks_container {
+  transition: all 1s ease-in-out; }
+
 .task__header {
   display: -webkit-flex;
   display: -ms-flexbox;

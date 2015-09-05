@@ -130,13 +130,25 @@ li.head:hover {
   .task-close_small:hover {
     color: $red;
   }
-  
 }
 
 .task {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+}
+#task-input {
+  margin-bottom: $base-spacing;  
+}
+
+.hidden {
+  opacity: 0;
+}
+.unhidden {
+  opacity: 100 !important;
+}
+.tasks_container {
+  transition: all 1s ease-in-out;
 }
 
 .task__header {
@@ -415,7 +427,6 @@ select {
   left: 0;
   width: 100%;
   display: none;
-  -webkit-filter: blur(200px);
   filter: blur(200px);
   transition: all 0.5s;
 }

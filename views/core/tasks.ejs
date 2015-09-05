@@ -1,59 +1,61 @@
 
-<div class="tasks_container">
-
-  <div id="task-input">
+<div id="task-input">
+  
+  <div id="task-new" class="box bg-darkblue">
     
-    <div id="task-new" class="box bg-darkblue">
+    <div class="task-new__close task-close_small"><span class='ion-close-circled'></span></div>
+    
+    <form name="task-new">
+      <div class="task__input_label text-light">Task Summary</div>
+      <input class="task__input task-form-field"></input>
       
-      <div class="task-new__close task-close_small"><span class='ion-close-circled'></span></div>
+      <div class="task__input_label text-light">Task Description</div>
+      <textarea class="task__textarea task-form-field"></textarea>
+
+      <!--<div class="task__input_label text-light">focusegory</div>-->
+      <!--<select>-->
+      <!--  <option>Financial</option>-->
+      <!--  <option selected>Personal</option>-->
+      <!--  <option>Work</option>-->
+      <!--  <option>Chore</option>-->
+      <!--</select>-->
       
-      <form name="task-new">
-        
-        <div class="task__input_label text-light">Task Summary</div>
-        <input class="task__input task-form-field"></input>
-        
-        <div class="task__input_label text-light">Task Description</div>
-        <textarea class="task__textarea task-form-field"></textarea>
-        
-        <!--<div class="task__input_label text-light">focusegory</div>-->
-        <!--<select>-->
-        <!--  <option>Financial</option>-->
-        <!--  <option selected>Personal</option>-->
-        <!--  <option>Work</option>-->
-        <!--  <option>Chore</option>-->
-        <!--</select>-->
-        
-        <div class="task__input_label text-light">FOCUS <span class="ion-help-circled"></span></div>
-        <div class="task__focusselect">
-          <div class="focus_option" data-selected="false"><span class="ion-ios-cart task__icon"></span>Financial</div>
-          <div class="focus_option" data-selected="false"><span class="ion-gear-b task__icon"></span>Chore</div>
-          <div class="focus_option" data-selected="false"><span class="ion-ios-body task__icon"></span>Personal</div>
-          <div class="focus_option" data-selected="false"><span class="ion-briefcase task__icon"></span>Work</div>
-          <div class="focus_option" data-selected="false"><span class="ion-android-people task__icon"></span>Family</div> 
-          <!--<div class="focus_option" data-selected="false"><span class="ion-plus-circled task__icon"></span>Focus</div>-->
-        </div>
-        
-        
-        <div class="task__input_label text-light">SCORE <span class="ion-help-circled"></span></div>
-        <div class="task__scoreselect">
-          <div class="score_option" data-selected="false"><span class="ion-flash"></span> 1</div>
-          <div class="score_option" data-selected="false"><span class="ion-flash"></span> 2</div>
-          <div class="score_option" data-selected="false"><span class="ion-flash"></span> 3</div>
-          <div class="score_option" data-selected="false"><span class="ion-flash"></span> 4</div>
-          <div class="score_option" data-selected="false"><span class="ion-flash"></span> 5</div>
-        </div>
-        
-        <div class="task__confirm_container">
-          <div id="task_submit" class="button submit bg-green "><span class="ion-checkmark task__icon"></span></div>
-          <!--<div class="button submit task-new__clear bg-yellow"><span class="ion-trash-b task__icon"></span></div>-->
-          <div class="button submit task-new__close bg-red"><span class="ion-close task__icon"></span></div>
-        </div>
-        
+      <div class="task__input_label text-light">FOCUS <span class="ion-help-circled"></span></div>
+      <div class="task__focusselect">
+        <div class="focus_option" data-selected="false"><span class="ion-ios-cart task__icon"></span>Financial</div>
+        <div class="focus_option" data-selected="false"><span class="ion-gear-b task__icon"></span>Chore</div>
+        <div class="focus_option" data-selected="false"><span class="ion-ios-body task__icon"></span>Personal</div>
+        <div class="focus_option" data-selected="false"><span class="ion-briefcase task__icon"></span>Work</div>
+        <div class="focus_option" data-selected="false"><span class="ion-android-people task__icon"></span>Family</div> 
+        <!--<div class="focus_option" data-selected="false"><span class="ion-plus-circled task__icon"></span>Focus</div>-->
+      </div>
       
-      </form>
       
-    </div>
+      <div class="task__input_label text-light">SCORE <span class="ion-help-circled"></span></div>
+      <div class="task__scoreselect">
+        <div class="score_option" data-selected="false"><span class="ion-flash"></span> 1</div>
+        <div class="score_option" data-selected="false"><span class="ion-flash"></span> 2</div>
+        <div class="score_option" data-selected="false"><span class="ion-flash"></span> 3</div>
+        <div class="score_option" data-selected="false"><span class="ion-flash"></span> 4</div>
+        <div class="score_option" data-selected="false"><span class="ion-flash"></span> 5</div>
+      </div>
+      
+      <div class="task__confirm_container">
+        <div id="task_submit" class="button submit bg-green "><span class="ion-checkmark task__icon"></span></div>
+        <!--<div class="button submit task-new__clear bg-yellow"><span class="ion-trash-b task__icon"></span></div>-->
+        <div class="button submit task-new__close bg-red"><span class="ion-close task__icon"></span></div>
+      </div>
+      
+    
+    </form>
     
   </div>
+  
+</div>
 
+<div class="no-tasks-message" style="display:none">
+  <h1>Go ahead,&nbsp; <span class="ion-plus-circled"></span> &nbsp; a task to your list and get going.</h1>
+</div>
+<div class="tasks_container hidden">
+  
 </div>

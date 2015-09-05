@@ -1,5 +1,4 @@
 
-
 var Task = {
     title: "",
     details: "",
@@ -14,10 +13,12 @@ var submitTaskForm = function(){
     score: Task.score,
     focus: Task.focus,
     complete: false,
+    added_at: Firebase.ServerValue.TIMESTAMP,
     public: false
   });
   
-  clearTaskForm();
+  clearTaskForm(); //Empties form
+  hideNewTaskForm(); //Rolls it up
 }
 
 var clearTaskForm = function(){
@@ -34,18 +35,20 @@ var clearTaskForm = function(){
   
 }
 
-//!! WRITE validation
 var validateModel = function() {
+  //!! WRITE this shit
   return true;
 }
 
+var clearTasks = function(){
+  $('.tasks_container').empty();
+}
 
 var buildTask = function(id, title, details, score, focus, complete) {
   
-  console.log('building task', id, title, details, score, focus, complete);
   var task = this.view = document.createElement("div");
   task.setAttribute('class', 'task');
-  task.setAttribute('id', 'id');
+  task.setAttribute('data-id', id);
   
     var task_header = task.appendChild(document.createElement("div"));
     task_header.setAttribute('class', 'task__header');
@@ -68,18 +71,31 @@ var buildTask = function(id, title, details, score, focus, complete) {
       var task__body_actions = task_body.appendChild(document.createElement("div"));
       task__body_actions.setAttribute('class', 'task__body_actions');
         var task_action = task__body_actions.appendChild(document.createElement("div"));
-        task_action.setAttribute('class', 'task__action bg-grey-hover');
-        task_action.innerHTML = "<span class='ion-edit'></span>";
-        var task_action = task__body_actions.appendChild(document.createElement("div"));
         task_action.setAttribute('class', 'task__action bg-green-hover');
+        task_action.setAttribute('data-action', 'completeTask');
         task_action.innerHTML = "<span class='ion-checkmark'></span>";
         var task_action = task__body_actions.appendChild(document.createElement("div"));
         task_action.setAttribute('class', 'task__action bg-red-hover');
+        task_action.setAttribute('data-action', 'deleteTask');
         task_action.innerHTML = "<span class='ion-close'></span>";
         
-  $(task).appendTo('.tasks_container');
+  return task;
 }
 
+var getIdFromElement = function(element){
+  return $(element).closest('.task').attr('data-id');
+}
+
+var deleteTask = function(node){
+  var rid = getIdFromElement(node);
+  $(node).closest('.task').hide();
+  ref.child("tasks").child(uid).child(rid).set(null);
+}
+
+var completeTask = function(node){
+  var rid = getIdFromElement(node);
+  ref.child("tasks").child(uid).child(rid).update({complete: true});
+}
 
 
 //Listeners
@@ -88,11 +104,19 @@ if (ref.getAuth()){
   var uid = ref.getAuth().uid;
   
   //On change, reflow
-  ref.child("tasks").child(uid).on("value", function(snapshot) {
+  ref.child('tasks').child(uid).on('value', function(snapshot) {
     if (!$.isEmptyObject(snapshot.val())){
+      $('.no-tasks-message').hide();
+      var task_collection = $('<div></div>');
+      clearTasks();
       $.each( snapshot.val(), function( key, value ) {
-        buildTask(key, value.title, value.details, value.score, value.focus, value.complete);
+        task_collection.append(buildTask(key, value.title, value.details, value.score, value.focus, value.complete));
       }); 
+      $('.tasks_container').append($(task_collection).children().get().reverse());
+      $('.tasks_container').addClass('unhidden');
+    } else { //Case where you're deleting the last one
+      clearTasks();
+      $('.no-tasks-message').show();
     }
   });
 
@@ -100,23 +124,33 @@ if (ref.getAuth()){
 
 
 //Show/hide new form
-$('.task-new__close').on('click', function(){
+var hideNewTaskForm = function(){
   $( "#task-new" ).slideUp( "fast", function() {
     $( "#task-new" ).hide();
   });
+}
+$('.task-new__close').on('click', function(){
+  hideNewTaskForm();
 });
 
-$('#add-task').on('click', function(){
+var showNewTaskForm = function(){
   $( "#task-new" ).slideDown( "fast", function(){
     $( "#task-new" ).show();
   })
+}
+$('#add-task').on('click', function(){
+  showNewTaskForm();
 });
 
 
-//Task header toggle !!Review
-
+//Task header toggle
 $('.tasks_container').on('click', '.task__header', function() {
   $(this).parent().find('.task__body').slideToggle(100);
+});
+
+//Task Action Buttons
+$('.tasks_container').on('click', '.task__action', function() {
+  window[$(this).attr('data-action').toString()](this);
 });
 
 
