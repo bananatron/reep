@@ -60,13 +60,27 @@ var buildTask = function(id, title, details, score, focus, complete) {
       header_title.innerHTML = title;
       var header_score = task_header.appendChild(document.createElement("div"));
       header_score.setAttribute('class', 'header_score');
-      header_score.innerHTML = "<span class='ion-flash'></span>" + score + "</div>";
+      header_score.innerHTML = "<span class='ion-flash'></span> " + score + "</div>";
       
     var task_body = task.appendChild(document.createElement("div"));
     task_body.setAttribute('class', 'task__body bg-darkblue');
-      var task__body_details = task_body.appendChild(document.createElement("div"));
-      task__body_details.setAttribute('class', 'task__body_details');
-      task__body_details.innerHTML = details;
+    
+      var task__body_focus_container = task_body.appendChild(document.createElement("div"));
+      task__body_focus_container.setAttribute('class', 'task__body_focus_container');
+      focus.forEach(function(ff, ii){
+        var task__body_focus = task__body_focus_container.appendChild(document.createElement("div"));
+        task__body_focus.setAttribute('class', 'task__body_focus');
+        task__body_focus.innerHTML = ff;
+      });
+      
+      if (details){
+        var task__body_details = task_body.appendChild(document.createElement("div"));
+        task__body_details.setAttribute('class', 'task__body_details');
+        task__body_details.innerHTML = details;
+      }
+
+
+      console.log(focus);
       
       var task__body_actions = task_body.appendChild(document.createElement("div"));
       task__body_actions.setAttribute('class', 'task__body_actions');
@@ -138,7 +152,7 @@ var showNewTaskForm = function(){
     $( "#task-new" ).show();
   })
 }
-$('#add-task').on('click', function(){
+$('.add-task').on('click', function(){
   showNewTaskForm();
 });
 

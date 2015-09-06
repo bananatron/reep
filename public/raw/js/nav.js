@@ -16,5 +16,5 @@ if (loggedIn()){
   });
   
   //Add Task
-  $('#add-task').show();
+  $('.add-task').show();
 }

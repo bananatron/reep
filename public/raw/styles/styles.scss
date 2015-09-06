@@ -31,19 +31,22 @@ a {
 }
 
 .logo {
-  min-height: 100px;
+  min-height: 80px;
   font-weight: 300;
   width: 100%;
   font-size: 2rem;
   letter-spacing: -0.05rem;
-  background-image: url("../images/logo_100.png");
+  background-image: url("../images/sm_3d_tri.png");
+  background-image: url("../images/sm_white_tri.png");
+  //background-image: url("../images/sm_3d_tri.png") !important;
   background-repeat: no-repeat;
   background-size: contain;
-  transition: all 1s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .logo:hover{
-  filter: hue-rotate(180deg);
+  background-image: url("../images/sm_3d_tri.png") !important;
+  //filter: hue-rotate(180deg);
 }
 
 
@@ -63,7 +66,7 @@ li {
   /*border-radius: 5px;*/
 }
 li:hover {
-  background-color: rgb(85, 201, 169);
+  background-color: $green;
   color: #252830;
   cursor: pointer;
 }
@@ -97,7 +100,7 @@ li.head:hover {
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .form-control:focus {
-  border-color: #ffffff;
+  border-color: transparent;
   outline: 0;
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 px rgba(255, 255, 255, 0.2);
 }
@@ -106,15 +109,15 @@ li.head:hover {
 
 
 /* TASKS */
-#add-task {
+.add-task-header {
   position: absolute;
   top: $base-spacing;
   right: $base-spacing;
-  font-size: 2rem;
+  font-size: 2.3rem;
   cursor: pointer;
   display: none;
 }
-#add-task:hover {
+.add-task-header:hover {
   color: $green;
 }
 
@@ -155,10 +158,10 @@ li.head:hover {
   display: flex;
   padding: 0.5rem 0.8rem;
   align-items: center;
-  background: rgb(159, 134, 255);
-  border-bottom: 4px solid rgba(0, 0, 0, 0.2);
+  background: $yellow;
+  // border-bottom: 4px solid rgba(0, 0, 0, 0.2);
   cursor: default;
-  
+  transition: all 0.3s ease-in-out;
   .header_title{
     flex-grow: 10;
     color: $text-dark;
@@ -173,7 +176,7 @@ li.head:hover {
   }
   
   .header_score{
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     flex-grow: 1;
     font-weight: 700;
     color: $text-dark;
@@ -184,9 +187,7 @@ li.head:hover {
   
 }
 .task__header:hover {
-    filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feComponentTransfer color-interpolation-filters="sRGB"><feFuncA type="table" tableValues="0 0.25" /></feComponentTransfer></filter></svg>#filter');
-  -webkit-filter: opacity(90%);
-          filter: opacity(90%);
+  background-color: lighten( $yellow, 10% );
 }
 
 .task__confirm_container {
@@ -205,16 +206,43 @@ li.head:hover {
 
 .task__body_details{
   padding: 1rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
 }
 
 .task__body_actions {
   display:flex;
 }
+
+.task__body_focus_container {
+  display: flex;
+}
+.task__body_focus {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-left:2px;
+  text-align: center;
+  padding: 0.5rem;
+  flex-grow: 1;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.task__body_focus:first-child{
+  margin-left: 0px;
+}
+.task__body_focus:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+
 .task__action {
   flex-grow: 1;
   text-align: center;
   padding: 0.8rem;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   border-left: 1px solid $text-dark;
   transition: all 0.1s ease-in-out;
 }
@@ -284,12 +312,6 @@ li.head:hover {
     font-weight: 300;
     border: 1px solid $text-dark;
   }
-
-  
-  .focus_option:hover {
-    color: $text-dark;
-    background-color: $yellow;
-  }
   
   
 }
@@ -309,10 +331,6 @@ li.head:hover {
     border: 1px solid $text-dark;
   }
 
-  .score_option:hover {
-    color: $text-dark;
-    background-color: $blue;
-  }
 }
 
 #user-login{
@@ -438,7 +456,7 @@ select {
   color: #fff;
   font-size: 2rem;
 }
-.footer__item:hover, .footer__item:active  {
+.footer__item:focus, .footer__item:active  {
   background-color: rgba(255, 255, 255, 0.1); 
 }
 
@@ -595,6 +613,9 @@ select {
     flex-direction: row;
     background-color: rgba(0, 0, 0, 0.3);
     display: none;
+  }
+  .add-task-header{
+    display: none !important;
   }
   
   li.head {
