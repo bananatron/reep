@@ -1,37 +1,66 @@
-var ref = new Firebase("https://reep.firebaseio.com");
+if (window.location.hash == '#noauth') new Notification('You need to log in first.', 'alert');
 
 
-var isNewUser = function() {
-  var uid = ref.getAuth().uid.toString();
-  var userRef = ref.child('users').child(uid);
-  userRef.once("value", function(snapshot) {
-    return true;
-  }, function (errorObject) {
-    return false;
-  });
+//Default focus set that all users start with
+var focus = {
+  d_chore: {
+    name: 'Chore',
+    color: '#cfd2da',
+    icon: 'gear-b'
+  },
+  d_family: {
+    name: 'Family',
+    color: '#1997c6',
+    icon: 'android-people'
+  },
+  d_financial: {
+    name: 'Financial',
+    color: '#1bc98e',
+    icon: 'ios-cart'
+  },
+  d_personal: {
+    name: 'Personal',
+    color: '#9f86ff',
+    icon: 'ios-body'
+  },
+  d_work: {
+    name: 'Work',
+    color: '#e64759',
+    icon: 'ios-briefcase'
+  }
 }
 
-
-
-
-//Listeners
+////////////////
+// Listeners //
+//////////////
 
 //Store new user creds on first signin (fb)
+
 ref.onAuth(function(authData) {
   
-  if (authData && isNewUser) {
-    if (authData.password.email){
-      ref.child("users").child(authData.uid).set({
-        email: authData.password.email,
-        provider: authData.provider
-      });
-    } else {
-      ref.child("users").child(authData.uid).set({
-        provider: authData.provider
-      });
+  if (ref.getAuth() != null){
+  ref.child('users').child(authData.uid).once('value', function(snapshot) {
+    
+    if (snapshot.val() == null){ //User doesn't yet exist in users table
+      
+      if (authData.password.email){
+        ref.child("users").child(authData.uid).set({
+          email: authData.password.email,
+          provider: authData.provider,
+          focus,
+          score: 0
+        });
+      } else {
+        ref.child("users").child(authData.uid).set({
+          provider: authData.provider
+        });
+      }
+      
     }
+  }, function (errorObj) {
+    console.log('firebase error', errorObj)
+  });
   }
-  
 });
 
 //Login button

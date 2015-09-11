@@ -46,9 +46,15 @@ app.get('/', function(req, res, next) {
   res.render('layout', launchParams);
 });
 
-/* GET index */
+/* GET login */
 app.get('/login', function(req, res, next) {
   res.locals.partial = 'login';
+  res.render('layout', launchParams);
+});
+
+/* GET profile */
+app.get('/profile', function(req, res, next) {
+  res.locals.partial = 'profile';
   res.render('layout', launchParams);
 });
 

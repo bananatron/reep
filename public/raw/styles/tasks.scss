@@ -1,0 +1,14 @@
+.task-filters {
+  display: flex;
+}
+.task-filters__option {
+  margin: $base-spacing/2 $base-spacing/2;
+  cursor: pointer;
+  .active {
+    
+  }
+  
+}
+.task-filters__option:first-child {
+  margin-left: 0;
+}

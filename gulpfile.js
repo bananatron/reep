@@ -22,14 +22,13 @@ gulp.task('scripts', function() {
 
 gulp.task('styles', function () {
   return gulp.src(paths.styles)
+    .pipe(concat('styles.css'))
     .pipe(sass().on('error', sass.logError))
     // .pipe(gulp.dest('public/min/css'))
     .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
         }))
-    //.pipe(sourcemaps.init())
-      .pipe(concat('styles.css'))
     .pipe(gulp.dest('public/css'));
 });
 

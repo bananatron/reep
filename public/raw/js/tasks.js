@@ -8,8 +8,8 @@ var Task = {
 
 var submitTaskForm = function(){
   ref.child("tasks").child(uid).push({
-    title: Task.title,
-    details: Task.details,
+    title: cleanString(Task.title),
+    details: cleanString(Task.details),
     score: Task.score,
     focus: Task.focus,
     complete: false,
@@ -35,26 +35,72 @@ var clearTaskForm = function(){
   
 }
 
-var validateModel = function() {
-  //!! WRITE this shit
-  return true;
+var validateModel = function(model, callback) {
+  
+  var validationErrors = [];
+  
+  if (model.title.length < 1){
+    validationErrors.push('You need a title for your task');
+  };
+  if (model.title.length > 40){
+    validationErrors.push('Your title is bit too long');
+  };
+  if (model.focus < 1){
+    validationErrors.push('You need to choose a focus');
+  };
+  if (model.score == 0){
+    validationErrors.push('You need to choose a score');
+  };
+  
+  if (validationErrors.length > 0) {
+    validationErrors.forEach(function(errorMsg){
+      new Notification(errorMsg, 'alert');
+    });
+    window.scrollTo(0, 0);
+  } else {
+    callback();
+  }
+  
 }
+
+//Build focus options from user data
+var buildFocusOptions = function(){
+  ref.child('users').child(uid).child('focus').once('value', function(snapshot) {
+    $.each(snapshot.val(), function(key, value){
+      var $focusOption = $("<div class='focus_option' data-focus-id='"+ key +"' data-focus-color='"+ value.color +"' data-selected='false'><span class='ion-" + value.icon + " task__icon'></span>"+ value.name +"</div>")
+      $('.task__focusselect').append($focusOption);
+    })
+  });
+}
+//only do this on correct page?
+buildFocusOptions();
+
 
 var clearTasks = function(){
   $('.tasks_container').empty();
 }
 
-var buildTask = function(id, title, details, score, focus, complete) {
+var buildTask = function(id, title, details, score, focus, focusObj, complete) {
   
+
   var task = this.view = document.createElement("div");
   task.setAttribute('class', 'task');
   task.setAttribute('data-id', id);
+  task.setAttribute('data-score', score);
   
     var task_header = task.appendChild(document.createElement("div"));
     task_header.setAttribute('class', 'task__header');
-      var header_focus = task_header.appendChild(document.createElement("div"));
-      header_focus.setAttribute('class', 'header_focus');
-      header_focus.innerHTML = "<span class='ion-coffee'></span>";
+    
+    var header_focus_container = task_header.appendChild(document.createElement("div"));
+    header_focus_container.setAttribute('class', 'header_focus_container')
+    
+      focus.forEach( function(ff, ii) {
+        var header_focus = header_focus_container.appendChild(document.createElement("div"));
+        header_focus.setAttribute('class', 'header_focus');
+        header_focus.innerHTML = "<span class='ion-"+ focusObj[ff].icon +"'></span>";
+        task_header.appendChild(header_focus_container);
+      });
+      
       var header_title = task_header.appendChild(document.createElement("div"));
       header_title.setAttribute('class', 'header_title');
       header_title.innerHTML = title;
@@ -64,23 +110,21 @@ var buildTask = function(id, title, details, score, focus, complete) {
       
     var task_body = task.appendChild(document.createElement("div"));
     task_body.setAttribute('class', 'task__body bg-darkblue');
-    
-      var task__body_focus_container = task_body.appendChild(document.createElement("div"));
-      task__body_focus_container.setAttribute('class', 'task__body_focus_container');
-      focus.forEach(function(ff, ii){
-        var task__body_focus = task__body_focus_container.appendChild(document.createElement("div"));
-        task__body_focus.setAttribute('class', 'task__body_focus');
-        task__body_focus.innerHTML = ff;
-      });
-      
+
       if (details){
         var task__body_details = task_body.appendChild(document.createElement("div"));
         task__body_details.setAttribute('class', 'task__body_details');
         task__body_details.innerHTML = details;
       }
-
-
-      console.log(focus);
+      
+      var task__body_focus_container = task_body.appendChild(document.createElement("div"));
+      task__body_focus_container.setAttribute('class', 'task__body_focus_container');
+      focus.forEach(function(ff, ii){
+        var task__body_focus = task__body_focus_container.appendChild(document.createElement("div"));
+        task__body_focus.setAttribute('class', 'task__body_focus');
+        task__body_focus.innerHTML = focusObj[ff].name;
+        task__body_focus.style.color = focusObj[ff].color;
+      });
       
       var task__body_actions = task_body.appendChild(document.createElement("div"));
       task__body_actions.setAttribute('class', 'task__body_actions');
@@ -91,9 +135,12 @@ var buildTask = function(id, title, details, score, focus, complete) {
         var task_action = task__body_actions.appendChild(document.createElement("div"));
         task_action.setAttribute('class', 'task__action bg-red-hover');
         task_action.setAttribute('data-action', 'deleteTask');
-        task_action.innerHTML = "<span class='ion-close'></span>";
+        task_action.innerHTML = "<span class='ion-trash-a'></span>";
         
   return task;
+
+
+  
 }
 
 var getIdFromElement = function(element){
@@ -107,8 +154,20 @@ var deleteTask = function(node){
 }
 
 var completeTask = function(node){
+  
+  var taskScore = $(node).closest('.task').data().score;
+  var currentUserScore;
+  ref.child('users').child(uid).child('score').once('value', function(snapshot) {
+    currentUserScore = snapshot.val();
+  });
+  var newScore = currentUserScore + taskScore;
+  ref.child('users').child(uid).update({ score: newScore });
+    
+  
+  
   var rid = getIdFromElement(node);
   ref.child("tasks").child(uid).child(rid).update({complete: true});
+  
 }
 
 
@@ -118,16 +177,34 @@ if (ref.getAuth()){
   var uid = ref.getAuth().uid;
   
   //On change, reflow
-  ref.child('tasks').child(uid).on('value', function(snapshot) {
-    if (!$.isEmptyObject(snapshot.val())){
+  ref.child('tasks').child(uid).on('value', function(tasksSnap) {
+    if (!$.isEmptyObject(tasksSnap.val())){
       $('.no-tasks-message').hide();
       var task_collection = $('<div></div>');
       clearTasks();
-      $.each( snapshot.val(), function( key, value ) {
-        task_collection.append(buildTask(key, value.title, value.details, value.score, value.focus, value.complete));
-      }); 
-      $('.tasks_container').append($(task_collection).children().get().reverse());
-      $('.tasks_container').addClass('unhidden');
+      
+      ref.child('users').child(uid).child('focus').once('value', function(focusSnap) {
+        
+        var focusObj = focusSnap.val();
+        var lol = function(){
+          console.log('each complete');
+        }
+
+        $.each( tasksSnap.val(), function( key, value ) {
+          if (!value.complete){
+            //var icon = focusObj[value.focus].icon
+            console.log('bb', buildTask(key, value.title, value.details, value.score, value.focus, focusObj, value.complete))
+            task_collection.append(buildTask(key, value.title, value.details, value.score, value.focus, focusObj, value.complete));
+          }
+        }); 
+        
+        $('.tasks_container').append($(task_collection).children().get().reverse());
+        $('.tasks_container').addClass('unhidden');
+        
+      });
+      
+      
+      
     } else { //Case where you're deleting the last one
       clearTasks();
       $('.no-tasks-message').show();
@@ -162,6 +239,7 @@ $('.tasks_container').on('click', '.task__header', function() {
   $(this).parent().find('.task__body').slideToggle(100);
 });
 
+
 //Task Action Buttons
 $('.tasks_container').on('click', '.task__action', function() {
   window[$(this).attr('data-action').toString()](this);
@@ -186,7 +264,7 @@ $('.focus_option').on('click', function(){
   //Modify model
   Task.focus = [];
   $('.focus_option[data-selected="true"]').each(function( ii, node ) {
-    Task.focus.push( $(node).text() );
+    Task.focus.push( $(node).data().focusId );
   });
 });
 
@@ -201,7 +279,5 @@ $('.score_option').on('click', function(){
 
 //Submit button
 $('#task_submit').on('click', function(){
-  if (validateModel(Task)){
-    submitTaskForm();
-  };
+  validateModel(Task, submitTaskForm);
 });

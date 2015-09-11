@@ -9,6 +9,7 @@ $yellow: rgb(228, 216, 54);
 $blue: rgb(25, 151, 198);
 $grey: rgb(207, 210, 218);
 $darkblue: rgb(30, 33, 39);
+$darkerblue: rgb(24, 26, 31);
 $text-dark: rgb(30, 33, 39);
 $text-light: rgb(207, 210, 218);
 $bg-dark: rgb(37, 40, 48);
@@ -24,10 +25,20 @@ html, body {
   background-color: #252830;
 }
 
+body {
+  padding-bottom: 40px;
+  display: none;
+}
+
 a {
   text-decoration: none;
   color: inherit;
   font-weight: 500;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 300;
+  margin-top: $base-spacing*2;
 }
 
 .logo {
@@ -38,15 +49,13 @@ a {
   letter-spacing: -0.05rem;
   background-image: url("../images/sm_3d_tri.png");
   background-image: url("../images/sm_white_tri.png");
-  //background-image: url("../images/sm_3d_tri.png") !important;
   background-repeat: no-repeat;
   background-size: contain;
   transition: all 0.5s ease-in-out;
 }
 
 .logo:hover{
-  background-image: url("../images/sm_3d_tri.png") !important;
-  //filter: hue-rotate(180deg);
+  background-image: url("../images/sm_3d_tri.png");
 }
 
 
@@ -71,13 +80,14 @@ li:hover {
   cursor: pointer;
 }
 
-li.head {
+.head {
   font-weight: 300;
   font-size: 0.8rem;
   color: rgba(0, 0, 0, 0.8);
   text-transform: uppercase;
   color: rgba(207, 210, 218, 0.3);
   letter-spacing: 1px;
+  margin-bottom: $base-spacing/2;
 }
 
 li.head:hover {
@@ -151,44 +161,95 @@ li.head:hover {
   opacity: 100 !important;
 }
 .tasks_container {
-  transition: all 1s ease-in-out;
+  transition: all 0.6s ease-in-out;
 }
 
 .task__header {
   display: flex;
-  padding: 0.5rem 0.8rem;
+  // padding: $base-spacing;
   align-items: center;
-  background: $yellow;
+  background: $darkerblue;
   // border-bottom: 4px solid rgba(0, 0, 0, 0.2);
   cursor: default;
   transition: all 0.3s ease-in-out;
-  .header_title{
+  position: relative;
+  
+  .header_title {
     flex-grow: 10;
-    color: $text-dark;
-  }
-  .header_focus{
-    font-size: 1.8rem;
-    flex-grow: 1;
-    color: $text-dark;
-    min-width: 35px;
-    text-align: center;
-    margin-right:1rem;
+    color: $text-light;
+    letter-spacing: 0.2px;
+    font-size: 1.2rem;
+    padding: $base-spacing/2;
+    margin-left: $base-spacing/2;
   }
   
-  .header_score{
+  .header_focus_container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: $base-spacing/2;
+
+  }
+  
+  .header_focus {
+    font-size: 1.8rem;
+    color: $text-light;
+    min-width: 2rem;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  
+  .header_score {
     font-size: 1.1rem;
     flex-grow: 1;
     font-weight: 700;
-    color: $text-dark;
-    min-width: 40px;
+    color: $text-light;
     text-align: center;
+    background-color: $darkblue;
+    padding: $base-spacing $base-spacing $base-spacing $base-spacing*2;
+    position:relative;
   }
   
+  .header_score:before {
+    position: absolute;
+    content:"";
+    left: -20px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    border-left: 20px solid $bg-dark;
+    border-bottom: 0 solid transparent;
+    transform: skewX(15deg);
+    transition: all 0.3s ease-in-out;
+  }
+  .header_score:after {
+    position: absolute;
+    content:"";
+    left: -10px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    //border-left: 20px solid lighten($darkblue, 20%);
+    border-left: 20px solid $red;
+    border-bottom: 0 solid transparent;
+    transform: skewX(15deg);
+    transition: all 0.3s ease-in-out;
+  }
   
 }
-.task__header:hover {
-  background-color: lighten( $yellow, 10% );
+
+// .task__header:hover {
+//   border-top-left-radius: 15px;
+// }
+
+.task__header:hover > .header_score:before { 
+  transform: skewX(-10deg);
 }
+
+.task__header:hover > .header_score:after { 
+  transform: skewX(10deg);
+}
+
 
 .task__confirm_container {
   display: flex;
@@ -198,7 +259,7 @@ li.head:hover {
 }
 
 .task__body {
-  position: relative;
+  display: none;
 }
 .task__body--hidden {
   display: none;
@@ -206,8 +267,9 @@ li.head:hover {
 
 .task__body_details{
   padding: 1rem;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   letter-spacing: 0.5px;
+  border-top: 2px solid $bg-dark;
 }
 
 .task__body_actions {
@@ -216,6 +278,9 @@ li.head:hover {
 
 .task__body_focus_container {
   display: flex;
+  transition: all 0.1s ease-in-out;
+  border-bottom: 2px solid $bg-dark;
+  border-top: 2px solid #252830;
 }
 .task__body_focus {
   cursor: pointer;
@@ -223,17 +288,17 @@ li.head:hover {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  margin-left:2px;
+  // margin-left:2px;
   text-align: center;
   padding: 0.5rem;
   flex-grow: 1;
-  background-color: rgba(0, 0, 0, 0.15);
+  // background-color: rgba(0, 0, 0, 0.4);
 }
 .task__body_focus:first-child{
   margin-left: 0px;
 }
 .task__body_focus:hover {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 
@@ -243,7 +308,7 @@ li.head:hover {
   text-align: center;
   padding: 0.8rem;
   background-color: rgba(0, 0, 0, 0.2);
-  border-left: 1px solid $text-dark;
+  border-left: 2px solid $bg-dark;
   transition: all 0.1s ease-in-out;
 }
 .task__action:nth-child(1){
@@ -418,9 +483,7 @@ select {
   padding: 0.5rem;
   color: #cfd2da;
 }
-/*.left {*/
-  
-/*}*/
+
 .right {
   flex-grow: 1;
 }
@@ -435,29 +498,6 @@ select {
   margin-bottom: 0.5rem;
   padding: 0.2rem;
   /*border-radius: 4px;*/
-}
-
-.footer {
-  z-index: 9000;
-  background-color: rgb(0, 0, 0);
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  display: none;
-  filter: blur(200px);
-  transition: all 0.5s;
-}
-
-.footer__item {
-  padding: 1rem;
-  text-align: center;
-  flex-grow: 1;
-  color: #fff;
-  font-size: 2rem;
-}
-.footer__item:focus, .footer__item:active  {
-  background-color: rgba(255, 255, 255, 0.1); 
 }
 
 
@@ -590,18 +630,12 @@ select {
 }
 
 
-
-/* resize prep */
-@media screen and (max-width: 620px) { 
-  .footer {
-    display: flex;
-  }
-}
+//Mobile
 @media screen and (max-width: 600px) { 
   
   /* LAYOUT */
   body{
-    padding-bottom: 80px;
+    padding-bottom: 100px;
   }
   .left, .right {
     padding: inherit;
@@ -618,12 +652,20 @@ select {
     display: none !important;
   }
   
-  li.head {
-    display: none;
+  li.head, .header_score:before, .header_focus_container {
+    display: none !important;
   }
+  
+  .task__header .header_title {
+    font-size: 1rem !important;
+  }
+  
+  .notifications .note{
+    margin-right: 0 !important;  
+  }
+  
   .footer {
-    -webkit-filter: blur(0px);
-    filter: blur(0px);
+    display: flex !important;
   }
   
 }
