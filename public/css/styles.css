@@ -56,6 +56,9 @@ li:hover {
   color: #252830;
   cursor: pointer; }
 
+.select-hide {
+  cursor: pointer; }
+
 .head {
   font-weight: 300;
   font-size: 0.8rem;
@@ -177,7 +180,19 @@ li.head:hover {
     background-color: #1e2127;
     padding: 1rem 1rem 1rem 2rem;
     position: relative; }
-  .task__header .header_score:before {
+  .task__header .score-complete:after {
+    position: absolute;
+    content: "";
+    left: -10px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    border-left: 20px solid #1bc98e;
+    border-bottom: 0 solid transparent;
+    -webkit-transform: skewX(15deg);
+    transform: skewX(15deg);
+    transition: all 0.3s ease-in-out; }
+  .task__header .score-incomplete:before {
     position: absolute;
     content: "";
     left: -20px;
@@ -189,7 +204,7 @@ li.head:hover {
     -webkit-transform: skewX(15deg);
     transform: skewX(15deg);
     transition: all 0.3s ease-in-out; }
-  .task__header .header_score:after {
+  .task__header .score-incomplete:after {
     position: absolute;
     content: "";
     left: -10px;
@@ -203,12 +218,7 @@ li.head:hover {
     transition: all 0.3s ease-in-out; }
 
 .task__header:hover > .header_score:before {
-  -webkit-transform: skewX(-10deg);
-  transform: skewX(-10deg); }
-
-.task__header:hover > .header_score:after {
-  -webkit-transform: skewX(10deg);
-  transform: skewX(10deg); }
+  left: -10px; }
 
 .task__confirm_container {
   display: -webkit-flex;
@@ -2933,6 +2943,9 @@ select {
   padding: 1rem;
   width: 20%;
   text-align: center; }
+
+#profile-change-email, #profile-change-password {
+  display: none; }
 
 .task-filters {
   display: -webkit-flex;

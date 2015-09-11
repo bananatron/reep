@@ -80,6 +80,9 @@ li:hover {
   cursor: pointer;
 }
 
+.select-hide {
+  cursor: pointer;
+}
 .head {
   font-weight: 300;
   font-size: 0.8rem;
@@ -208,9 +211,24 @@ li.head:hover {
     background-color: $darkblue;
     padding: $base-spacing $base-spacing $base-spacing $base-spacing*2;
     position:relative;
+    
   }
   
-  .header_score:before {
+  .score-complete:after {
+    position: absolute;
+    content:"";
+    left: -10px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    //border-left: 20px solid lighten($darkblue, 20%);
+    border-left: 20px solid $green;
+    border-bottom: 0 solid transparent;
+    transform: skewX(15deg);
+    transition: all 0.3s ease-in-out;
+  }
+    
+  .score-incomplete:before {
     position: absolute;
     content:"";
     left: -20px;
@@ -222,7 +240,8 @@ li.head:hover {
     transform: skewX(15deg);
     transition: all 0.3s ease-in-out;
   }
-  .header_score:after {
+  
+  .score-incomplete:after {
     position: absolute;
     content:"";
     left: -10px;
@@ -235,19 +254,16 @@ li.head:hover {
     transform: skewX(15deg);
     transition: all 0.3s ease-in-out;
   }
+
   
 }
 
-// .task__header:hover {
-//   border-top-left-radius: 15px;
-// }
 
 .task__header:hover > .header_score:before { 
-  transform: skewX(-10deg);
+  left: -10px;
 }
 
 .task__header:hover > .header_score:after { 
-  transform: skewX(10deg);
 }
 
 

@@ -53,6 +53,10 @@ var validateAuth = function validateAuth(){
   }
 }
 
+$('.select-hide').on('click', function(){
+  $('#'+$(this).data().hideId).slideToggle(100);
+  console.log($(this).data().hideId);
+});
 
 var ref = new Firebase("https://reep.firebaseio.com");
 if (ref.getAuth()) var uid = ref.getAuth().uid.toString();
