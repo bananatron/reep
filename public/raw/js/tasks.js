@@ -50,12 +50,10 @@ var setFilters = function(element){
 }
 
 $('.task-filters__option').on('click', function(){
-  console.log('setting', this);
   setFilters(this);
 })
 
 var validateModel = function(model, callback) {
-  
   var validationErrors = [];
   
   if (model.title.length < 1){
@@ -79,7 +77,6 @@ var validateModel = function(model, callback) {
   } else {
     callback();
   }
-  
 }
 
 
@@ -102,7 +99,6 @@ var clearTasks = function(){
 
 var buildTask = function(id, title, details, score, focus, focusObj, complete) {
   
-
   var task = this.view = document.createElement("div");
   task.setAttribute('class', 'task');
   task.setAttribute('data-id', id);
@@ -163,9 +159,6 @@ var buildTask = function(id, title, details, score, focus, focusObj, complete) {
         task_action.innerHTML = "<span class='ion-trash-a'></span>";
         
   return task;
-
-
-  
 }
 
 var getIdFromElement = function(element){
@@ -179,7 +172,6 @@ var deleteTask = function(node){
 }
 
 var completeTask = function(node){
-  
   var taskScore = $(node).closest('.task').data().score;
   var currentUserScore;
   ref.child('users').child(uid).child('score').once('value', function(snapshot) {
@@ -187,23 +179,20 @@ var completeTask = function(node){
   });
   var newScore = currentUserScore + taskScore;
   ref.child('users').child(uid).update({ score: newScore });
-    
-  
-  
+
   var rid = getIdFromElement(node);
   ref.child("tasks").child(uid).child(rid).update({complete: true});
-  
 }
 
 var refreshTasks = function(uid){
-    //On change, reflow
+  //On change, reflow
   ref.child('tasks').child(uid).on('value', function(tasksSnap) {
     if (!$.isEmptyObject(tasksSnap.val())){
       $('.no-tasks-message').hide();
       var task_collection = $('<div></div>');
       clearTasks();
       
-      ref.child('users').child(uid).child('focus').once('value', function(focusSnap) {
+      ref.child('users').child(uid).child('focus').on('value', function(focusSnap) {
         
         var focusObj = focusSnap.val(); //User focus' for generation/comparison
 
@@ -220,8 +209,6 @@ var refreshTasks = function(uid){
         
       });
       
-      
-      
     } else { //Case where you're deleting the last one
       clearTasks();
       $('.no-tasks-message').show();
@@ -229,15 +216,15 @@ var refreshTasks = function(uid){
   });
 }
 
+
+
 //Listeners
 if (ref.getAuth()){
-    
   var uid = ref.getAuth().uid;
-  
   refreshTasks(uid);
-
-} else { console.log("No user logged in.") }
-
+} else {
+  console.log("No user logged in.") 
+}
 
 //Show/hide new form
 var hideNewTaskForm = function(){
@@ -245,7 +232,7 @@ var hideNewTaskForm = function(){
     $( "#task-new" ).hide();
   });
 }
-//$(document).on("click","#test-element",
+
 $('.right').on('click', '.task-new__close', function(){
   hideNewTaskForm();
 });
@@ -265,13 +252,10 @@ $('.tasks_container').on('click', '.task__header', function() {
   $(this).parent().find('.task__body').slideToggle(100);
 });
 
-
 //Task Action Buttons
 $('.tasks_container').on('click', '.task__action', function() {
   window[$(this).attr('data-action').toString()](this);
 });
-
-
 
 //Text Inputs
 $('.task__input').on('keyup', function(){ //Title
@@ -280,8 +264,6 @@ $('.task__input').on('keyup', function(){ //Title
 $('.task__textarea').on('keyup', function(){ //Details
   Task.details = $(this).val();
 })
-
-
 
 //Focus Selection
 $('.right').on('click', '.focus_option', function(){
@@ -294,14 +276,12 @@ $('.right').on('click', '.focus_option', function(){
   });
 });
 
-
 //Score Selection
 $('.right').on('click', '.score_option', function(){
   $('.score_option[data-selected="true"]').attr('data-selected', 'false');
   toggleSelected(this);
   Task.score = parseInt( $(this).text().trim() )
 });
-
 
 //Submit button
 $('.right').on('click', '#task_submit', function(){

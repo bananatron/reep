@@ -13,12 +13,6 @@ cleanString = function(str){
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
 }
 
-var validateModel = function(model){ //Maybe put in notifications here?
-  if (model.summary == "" || model.summary == undefined) return false;
-  if (model.score == 0 || model.score == undefined) return false
-
-  return true;
-}
 
 var toggleSelected = function(self){
   if ( $(self).attr('data-selected') == 'true' ) {
