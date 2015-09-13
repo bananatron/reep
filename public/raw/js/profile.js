@@ -44,3 +44,37 @@ if (loggedIn()){
   $('.current-email').text(ref.getAuth().password.email);
   
 }
+
+$('#submit-change-email').on('click', function(){
+  ref.changeEmail({
+    oldEmail : ref.getAuth().password.email,
+    newEmail : $('#input-new-email').val(),
+    password : $('#input-new-email-password').val()
+  }, function(error) {
+    if (error === null) {
+      Notification("Email changed successfully! Your changes will become effective the next time you log in");
+    } else {
+      Notification(error, 'alert');
+    }
+  });
+})
+
+$('#submit-change-password').on('click', function(){
+  if ($('#input-new-password-newpass').val() == $('#input-new-password-newpass_again').val()){
+    ref.changePassword({
+      email       : ref.getAuth().password.email,
+      oldPassword : $('#input-new-password-oldpass').val(),
+      newPassword : $('#input-new-password-newpass').val()
+    }, function(error) {
+      if (error === null) {
+        ('#input-new-password-newpass_again, #input-new-password-newpass, #input-new-password-oldpass').val('')
+        Notification("Password changed successfully!");
+      } else {
+        Notification(error, 'alert');
+      }
+    });
+  } else {
+    Notification("Your passwords don't match");
+  }
+
+});
